@@ -1,5 +1,6 @@
 #
-# AI processor main module
+# ChatAPRS
+# AI processor selector module
 # Author: Joerg Schultze-Lutter, 2025
 #
 # This program is free software; you can redistribute it and/or modify
@@ -25,8 +26,8 @@
 # acts as a decision tree on which post processor is about to get called.
 # The actual post processiing is done in the various sub sections
 
-from ai_processor_openai import ai_prompt_openai
-from ai_processor_palm import ai_prompt_palm
+from chap_ai_processor_openai import ai_prompt_openai
+from chap_ai_processor_palm import ai_prompt_palm
 
 available_processors = {
     "openai": ai_prompt_openai,
