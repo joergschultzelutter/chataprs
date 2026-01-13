@@ -29,7 +29,7 @@ import logging
 import chap_shared
 
 from chap_logger import logger
-from chap_utils import get_modification_time, read_config_file_from_disk
+from chap_utils import get_modification_time, read_prompt_file_from_disk
 
 
 def get_command_line_params():
