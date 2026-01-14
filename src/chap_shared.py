@@ -23,7 +23,7 @@
 #
 
 # shared variables
-config_initial_timestamp = None
+user_prompt_initial_timestamp = None
 config_data = None
 command_config_filename = None
 
