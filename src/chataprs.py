@@ -108,10 +108,10 @@ if __name__ == "__main__":
         )
         sys.exit(0)
 
-    # remember the file's initial config file timestamp, thus allowing us to
+    # remember the prompt file's initial timestamp, thus allowing us to
     # detect any changes to the file during runtime (and re-read the file
     # into memory, if necessary)
-    chap_shared.config_initial_timestamp = get_modification_time(
+    chap_shared.user_prompt_initial_timestamp = get_modification_time(
         filename=chap_shared.user_prompt_filename
     )
 
