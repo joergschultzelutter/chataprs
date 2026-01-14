@@ -99,7 +99,7 @@ if __name__ == "__main__":
         sys.exit(0)
 
     # Read the config file from disk
-    success, chap_shared.user_prompt = read_prompt_file_from_disk(
+    success, chap_shared.user_prompt_data = read_prompt_file_from_disk(
         filename=chap_shared.user_prompt_filename
     )
     if not success:
