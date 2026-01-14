@@ -25,7 +25,7 @@
 #
 
 from CoreAprsClient import CoreAprsClient
-from chap_ai_processor_pain import process_ai_content
+from chap_ai_processor_main import process_ai_content
 
 
 def generate_output_message(

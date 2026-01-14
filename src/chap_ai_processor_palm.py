@@ -23,7 +23,7 @@
 #
 #
 import google.generativeai as palm
-from client_logger import logger
+from chap_logger import logger
 
 
 def _process_ai_request(

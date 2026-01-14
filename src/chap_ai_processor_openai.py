@@ -24,7 +24,7 @@
 import openai
 from openai import OpenAI
 import json
-from client_logger import logger
+from chap_logger import logger
 
 
 def ai_prompt_openai(user_prompt: str, input_text: str, api_key: str, **kwargs):
