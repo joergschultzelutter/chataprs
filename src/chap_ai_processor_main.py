@@ -24,7 +24,7 @@
 #
 # This module tries to shorten the given input text whereas possible. It
 # acts as a decision tree on which post processor is about to get called.
-# The actual post processiing is done in the various sub sections
+# The actual post-processing is done in the various subsections
 
 from chap_ai_processor_openai import ai_prompt_openai
 from chap_ai_processor_palm import ai_prompt_palm
