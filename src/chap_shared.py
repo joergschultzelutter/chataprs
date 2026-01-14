@@ -24,8 +24,8 @@
 
 # shared variables
 user_prompt_initial_timestamp = None
-config_data = None
-command_config_filename = None
+user_prompt_data = None
+user_prompt_filename = None
 
 
 if __name__ == "__main__":
