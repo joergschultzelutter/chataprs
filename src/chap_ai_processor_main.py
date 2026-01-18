@@ -31,7 +31,7 @@ from chap_ai_processor_palm import ai_prompt_palm
 
 ai_processors = {
     "openai": ai_prompt_openai,
-    "palm": ai_prompt_palm,
+    "googlepalm": ai_prompt_palm,
 }
 
 ai_processors_qualifiers = list(ai_processors.keys())

@@ -77,9 +77,9 @@ def parse_input_message(
     if matches:
         new_ai_processor = matches.group("proc")
         command_code = "llm_change"
-
-    command_code = "llm_process"
-    input_parser_error_message = ""
+    else:
+        command_code = "llm_process"
+        input_parser_error_message = ""
     return_code = CoreAprsClientInputParserStatus.PARSE_OK
 
     # our target dictionary that is going to be used by the output processor
