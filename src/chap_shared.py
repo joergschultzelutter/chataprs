@@ -26,6 +26,7 @@
 user_prompt_initial_timestamp = None
 user_prompt_data = None
 user_prompt_filename = None
+ai_processor = None
 
 
 if __name__ == "__main__":

@@ -29,17 +29,19 @@
 from chap_ai_processor_openai import ai_prompt_openai
 from chap_ai_processor_palm import ai_prompt_palm
 
-available_processors = {
+ai_processors = {
     "openai": ai_prompt_openai,
     "palm": ai_prompt_palm,
 }
+
+ai_processors_qualifiers = list(ai_processors.keys())
 
 
 def process_ai_content(
     user_prompt: str, input_text: str, ai_processor: str, api_key: str
 ):
-    assert ai_processor in available_processors
-    return available_processors[ai_processor](
+    assert ai_processor in ai_processors
+    return ai_processors[ai_processor](
         user_prompt=user_prompt, input_text=input_text, api_key=api_key
     )
 

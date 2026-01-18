@@ -23,6 +23,10 @@
 
 from CoreAprsClient import CoreAprsClient, CoreAprsClientInputParserStatus
 
+import chap_ai_processor_main
+from chap_ai_processor_main import ai_processors_qualifiers
+import re
+
 
 def parse_input_message(
     instance: CoreAprsClient, aprs_message: str, from_callsign: str, **kwargs
@@ -64,11 +68,21 @@ def parse_input_message(
     """
 
     success = True
+
+    # try to determine if we are supposed to switch
+    pattern = rf"^\s*llm\s+(?P<proc>{'|'.join(map(re.escape, chap_ai_processor_main.ai_processors_qualifiers))})\s*(?P<msg>.*)$"
+    regex = re.compile(pattern, re.IGNORECASE)
+
+    matches = regex.match(aprs_message)
+    if matches:
+        new_ai_processor = matches.group("proc")
+        command_code = "llm_change"
+
     command_code = "llm_process"
     input_parser_error_message = ""
     return_code = CoreAprsClientInputParserStatus.PARSE_OK
 
-  # our target dictionary that is going to be used by the output processor
+    # our target dictionary that is going to be used by the output processor
     # for further processing.
     # You can (and have to) amend this dict object so that it contains all fields
     # relevant for output processing. Ensure that both input parser and output processor
