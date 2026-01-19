@@ -30,6 +30,7 @@ import chap_shared
 
 from chap_logger import logger
 from chap_utils import get_modification_time, read_prompt_file_from_disk
+from chap_ai_processor_main import ai_processors_qualifiers
 
 
 def get_command_line_params():
@@ -54,14 +55,22 @@ def get_command_line_params():
         help="APRS framework config file name (default is 'chataprs.cfg')",
     )
 
+    parser.add_argument(
+        "--ai",
+        default=ai_processors_qualifiers[0],
+        choices=ai_processors_qualifiers,
+        help="Valid AI processors",
+    )
+
     args = parser.parse_args()
     cfg = args.configfile.name
+    ai = args.ai
 
     if not os.path.isfile(cfg):
         print("Config file does not exist; exiting")
         sys.exit(0)
 
-    return cfg
+    return cfg, ai
 
 
 if __name__ == "__main__":
@@ -69,7 +78,7 @@ if __name__ == "__main__":
     logger.debug(msg="Starting ChatAPRS")
 
     # Get the configuration file name
-    configfile = get_command_line_params()
+    configfile, my_ai = get_command_line_params()
 
     # Create the CoreAprsClient object. Supply the
     # following parameters:
