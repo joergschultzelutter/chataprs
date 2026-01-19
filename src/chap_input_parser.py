@@ -70,17 +70,22 @@ def parse_input_message(
     success = True
 
     # try to determine if we are supposed to switch
-    pattern = rf"^\s*llm\s+(?P<proc>{'|'.join(map(re.escape, chap_ai_processor_main.ai_processors_qualifiers))})\s*(?P<msg>.*)$"
+    pattern = rf"^\s*switchai\s+(?P<proc>{'|'.join(map(re.escape, chap_ai_processor_main.ai_processors_qualifiers))})\s*(?P<msg>.*)$"
     regex = re.compile(pattern, re.IGNORECASE)
 
     matches = regex.match(aprs_message)
     if matches:
         new_ai_processor = matches.group("proc")
-        command_code = "llm_change"
+        if new_ai_processor in chap_ai_processor_main.ai_processors_qualifiers:
+            command_code = "ai_change"
+            return_code = CoreAprsClientInputParserStatus.PARSE_OK
+        else:
+            return_code = CoreAprsClientInputParserStatus.PARSE_ERROR
+            input_parser_error_message = "That AI is not configured or unknown to me"
     else:
-        command_code = "llm_process"
+        command_code = "ai_process"
         input_parser_error_message = ""
-    return_code = CoreAprsClientInputParserStatus.PARSE_OK
+        return_code = CoreAprsClientInputParserStatus.PARSE_OK
 
     # our target dictionary that is going to be used by the output processor
     # for further processing.
