@@ -38,5 +38,5 @@ The following installation instructions assume that the user is using the defaul
 - Start the bot
 
 ```python
-nohup python secure_aprs_bastion_bot.py >nohup.out &
+nohup python chataprs.py >nohup.out &
 ```
