@@ -65,7 +65,7 @@ googlepalm = NOT_CONFIGURED
 
 
 ## Apprise config file
-- Configure the bot's Apprise messaging configuration file. If you want to disable the crash handler's Apprise messaging: see previous paragraph. 
+- Configure the bot's Apprise messaging configuration file. If you want to disable the crash handler's Apprise messaging: see [basic bot configuration](/docs/installation-instructions.md#basic-bot-configuration). 
   - rename the provided [`apprise.yml.TEMPLATE`](/configuration_file_examples/apprise.yml.TEMPLATE) configuration file and remove the `.TEMPLATE` file extension. `apprise.yml` is the file's default filename.
   - Configure the file as illustrated in Apprise's [YAML Configuration Documentation](https://github.com/caronc/apprise/wiki/config_yaml)
 
