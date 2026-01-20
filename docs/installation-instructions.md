@@ -37,6 +37,31 @@ The following sections describe be bot's configuration. The first section focuse
 
 The configuration that is specific to `chataprs` can be found at the end of the configuration file and consists of two sections:
 
+```python
+[chataprs]
+#
+# Configuration data that is specific to chataprs
+#
+# Filename for the llm prompt
+chap_llm_prompt_filename = chataprs_ai_prompt_{llm}.txt
+
+[ai_api_keys]
+#
+# API keys for each supported llm (see chap_ai_processor_main.py)
+# Names MUST be identical to content from "chap_ai_qualifiers" list
+# from the chap_ai_processor_main.py file
+# Set value to NOT_CONFIGURED if you don't want to use the API key
+#
+openai = NOT_CONFIGURED
+googlepalm = NOT_CONFIGURED
+```
+
+##### `chataprs` configuration section
+
+- `chap_llm_prompt_filename` contains a template filename for the future AI-specific user prompt file.
+
+##### `ai_api_keys` configuration section
+
 
 
 ## Apprise config file
