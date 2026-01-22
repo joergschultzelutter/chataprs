@@ -75,13 +75,24 @@ def parse_input_message(
 
     matches = regex.match(aprs_message)
     if matches:
+        _ai_error = False
         new_ai_processor = matches.group("proc")
         if new_ai_processor in chap_ai_processor_main.ai_processors_qualifiers:
-            command_code = "ai_change"
-            return_code = CoreAprsClientInputParserStatus.PARSE_OK
-        else:
+            if new_ai_processor in instance.config_data["chataprs"]:
+                _ai_api_key = instance.config_data["chataprs"][new_ai_processor]
+                if _ai_api_key is not "NOT_CONFIGURED":
+
+                    # externes Prompt-File lesen. Falls vorhanden:
+                    # Dateiinhalt plus Timestamp plus Dateinamen in chap_shared speicerhn
+                    # AI_processor und AI_API_Key in chap_shared speichern
+
+                    # wenn alles oben stimmt, dann positiv weitermachen
+                    command_code = "ai_change"
+                    return_code = CoreAprsClientInputParserStatus.PARSE_OK
+                    _ai_error = True
+        if not _ai_error:
             return_code = CoreAprsClientInputParserStatus.PARSE_ERROR
-            input_parser_error_message = "That AI is not configured or unknown to me"
+            input_parser_error_message = "That AI is either not configured or unknown to me"
     else:
         command_code = "ai_process"
         input_parser_error_message = ""
