@@ -19,7 +19,7 @@ The installation and configuration instructions can be found [here](/docs/instal
 
 ## Usage
 
-The bot only knows only one command (`switchai`). Any messages with different content are interpreted as a query to the AI. Information on the `switchai` keyword can be found [here](/docs/usage.md)
+The bot only knows only one command (`switchai`). Any messages with different content are interpreted as a query to the AI. Information on the `switchai` keyword can be found [here](/docs/usage.md).
 
 ## Technical details
 
