@@ -221,12 +221,14 @@ aprs_message_counter_file_name = core_aprs_client_message_counter.txt
 #
 # Configuration data that is specific to chataprs
 #
-# Filename for the llm prompt
+# Filename for the AI's individual user prompt
+# Placeholder "ai_processor" will later on be replaced with
+# the respective AI qualifier
 chap_ai_user_prompt_filename = chataprs_ai_prompt_{ai_processor}.txt
 
 [ai_processor_api_keys]
 #
-# API keys for each supported llm (see chap_ai_processor_main.py)
+# API keys for each supported AI (see chap_ai_processor_main.py)
 # Names MUST be identical to content from "chap_ai_qualifiers" list
 # from the chap_ai_processor_main.py file
 # Set value to NOT_CONFIGURED if you don't want to use the API key
