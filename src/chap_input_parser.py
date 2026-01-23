@@ -75,25 +75,34 @@ def parse_input_message(
 
     matches = regex.match(aprs_message)
     if matches:
-        _ai_error = False
+        _switch_ai_error = True
         new_ai_processor = matches.group("proc")
         if new_ai_processor in chap_ai_processor_main.ai_processors_qualifiers:
-            if new_ai_processor in instance.config_data["chataprs"]:
-                _ai_api_key = instance.config_data["chataprs"][new_ai_processor]
+            if new_ai_processor in instance.config_data["chataprs_api_keys"]:
+                _ai_api_key = instance.config_data["chataprs_api_keys"][new_ai_processor]
                 if _ai_api_key is not "NOT_CONFIGURED":
-
-                    # externes Prompt-File lesen. Falls vorhanden:
-                    # Dateiinhalt plus Timestamp plus Dateinamen in chap_shared speicerhn
-                    # AI_processor und AI_API_Key in chap_shared speichern
-
-                    # wenn alles oben stimmt, dann positiv weitermachen
-                    command_code = "ai_change"
-                    return_code = CoreAprsClientInputParserStatus.PARSE_OK
-                    _ai_error = True
-        if not _ai_error:
+                    # Since we have checked the existence of the template user prompt filename,
+                    # we do not perform any further checks on 
+                    _user_prompt_filename = instance.config_data["chataprs"][new_ai_processor].format(ai_processor=new_ai_processor)
+                    if does_file_exist:
+                        _success,_user_prompt_data=read_prompt_file_from_disk(filename=_user_prompt_filename)
+                        if _success:
+                            # Save content to our shared data area
+                            chap_shared.ai_processor=new_ai_processor
+                            chap_shared.ai_api_key=_ai_api_key
+                            chap_shared.user_prompt_filename=_user_prompt_filename
+                            chap_shared.user_prompt_data=_user_prompt_data
+                            chap_shared.user_prompt_initial_timestamp=get_modification_timestamp(filename=_user_prompt_filename)
+                            # Set our exit content and command code
+                            command_code = "ai_change"
+                            return_code = CoreAprsClientInputParserStatus.PARSE_OK
+                            _switch_ai_error = False
+        if  _switch_ai_error:
             return_code = CoreAprsClientInputParserStatus.PARSE_ERROR
             input_parser_error_message = "That AI is either not configured or unknown to me"
     else:
+        # no command code, meaning that this is a message which needs to be forwarded
+        # to the AI for further processing
         command_code = "ai_process"
         input_parser_error_message = ""
         return_code = CoreAprsClientInputParserStatus.PARSE_OK
