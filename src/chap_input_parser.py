@@ -26,6 +26,12 @@ from CoreAprsClient import CoreAprsClient, CoreAprsClientInputParserStatus
 import chap_ai_processor_main
 from chap_ai_processor_main import ai_processors_qualifiers
 import re
+from chap_utils import (
+    does_file_exist,
+    read_prompt_file_from_disk,
+    get_modification_time,
+)
+import chap_shared
 
 
 def parse_input_message(
@@ -67,7 +73,9 @@ def parse_input_message(
         structure for this variable.
     """
 
-    success = True
+    return_code = CoreAprsClientInputParserStatus.PARSE_ERROR
+    command_code = ""
+    input_parser_error_message = ""
 
     # try to determine if we are supposed to switch
     pattern = rf"^\s*switchai\s+(?P<proc>{'|'.join(map(re.escape, chap_ai_processor_main.ai_processors_qualifiers))})\s*(?P<msg>.*)$"
@@ -79,27 +87,37 @@ def parse_input_message(
         new_ai_processor = matches.group("proc")
         if new_ai_processor in chap_ai_processor_main.ai_processors_qualifiers:
             if new_ai_processor in instance.config_data["chataprs_api_keys"]:
-                _ai_api_key = instance.config_data["chataprs_api_keys"][new_ai_processor]
+                _ai_api_key = instance.config_data["chataprs_api_keys"][
+                    new_ai_processor
+                ]
                 if _ai_api_key is not "NOT_CONFIGURED":
                     # Since we have checked the existence of the template user prompt filename,
-                    # we do not perform any further checks on 
-                    _user_prompt_filename = instance.config_data["chataprs"][new_ai_processor].format(ai_processor=new_ai_processor)
-                    if does_file_exist:
-                        _success,_user_prompt_data=read_prompt_file_from_disk(filename=_user_prompt_filename)
+                    # we do not perform any further checks on
+                    _user_prompt_filename = instance.config_data["chataprs"][
+                        new_ai_processor
+                    ].format(ai_processor=new_ai_processor)
+                    if does_file_exist(file_name=_user_prompt_filename):
+                        _success, _user_prompt_data = read_prompt_file_from_disk(
+                            filename=_user_prompt_filename
+                        )
                         if _success:
                             # Save content to our shared data area
-                            chap_shared.ai_processor=new_ai_processor
-                            chap_shared.ai_api_key=_ai_api_key
-                            chap_shared.user_prompt_filename=_user_prompt_filename
-                            chap_shared.user_prompt_data=_user_prompt_data
-                            chap_shared.user_prompt_initial_timestamp=get_modification_timestamp(filename=_user_prompt_filename)
+                            chap_shared.ai_processor = new_ai_processor
+                            chap_shared.ai_api_key = _ai_api_key
+                            chap_shared.user_prompt_filename = _user_prompt_filename
+                            chap_shared.user_prompt_data = _user_prompt_data
+                            chap_shared.user_prompt_initial_timestamp = (
+                                get_modification_time(filename=_user_prompt_filename)
+                            )
                             # Set our exit content and command code
                             command_code = "ai_change"
                             return_code = CoreAprsClientInputParserStatus.PARSE_OK
                             _switch_ai_error = False
-        if  _switch_ai_error:
+        if _switch_ai_error:
             return_code = CoreAprsClientInputParserStatus.PARSE_ERROR
-            input_parser_error_message = "That AI is either not configured or unknown to me"
+            input_parser_error_message = (
+                "That AI is either not configured or unknown to me"
+            )
     else:
         # no command code, meaning that this is a message which needs to be forwarded
         # to the AI for further processing

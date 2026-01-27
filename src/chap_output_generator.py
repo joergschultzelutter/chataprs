@@ -26,6 +26,7 @@
 
 from CoreAprsClient import CoreAprsClient
 from chap_ai_processor_main import process_ai_content
+import chap_shared
 
 
 def generate_output_message(
@@ -70,9 +71,9 @@ def generate_output_message(
 
     # Assign default return values
     success = False
-    postprocessor_input_object = False
+    postprocessor_input_object = {}
     output_message = ""
-    
+
     # Get the command code and APRS message
     _command_code = input_parser_response_object["command_code"]
     _aprs_message = input_parser_response_object["aprs_message"]
@@ -81,12 +82,23 @@ def generate_output_message(
     match _command_code:
         case "ai_change":
             success = True
-            output_message = "AI was switched"
+            output_message = "AI change successful"
         case "ai_process":
-            pass
-            pass
+            output_message = process_ai_content(
+                user_prompt=chap_shared.user_prompt_data,
+                input_text=_aprs_message,
+                ai_processor=chap_shared.ai_processor,
+                api_key=chap_shared.ai_api_key,
+            )
+            if output_message is None:
+                success = False
+                output_message = "Error; unable to retrieve answer from AI"
+            else:
+                success = True
         case _:
-            raise ValueError(f"Output processor has received unknown command code '{_command_code}'")
+            raise ValueError(
+                f"Output processor has received unknown command code '{_command_code}'"
+            )
 
     return success, output_message, postprocessor_input_object
 
