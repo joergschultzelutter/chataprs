@@ -68,11 +68,27 @@ def generate_output_message(
         must not be 'None'
     """
 
+    # Assign default return values
+    success = False
+    postprocessor_input_object = False
+    output_message = ""
+    
+    # Get the command code and APRS message
     _command_code = input_parser_response_object["command_code"]
     _aprs_message = input_parser_response_object["aprs_message"]
 
+    # Evaluate the command code
+    match _command_code:
+        case "ai_change":
+            success = True
+            output_message = "AI was switched"
+        case "ai_process":
+            pass
+            pass
+        case _:
+            raise ValueError(f"Output processor has received unknown command code '{_command_code}'")
 
-    return False, None, None
+    return success, output_message, postprocessor_input_object
 
 
 if __name__ == "__main__":
