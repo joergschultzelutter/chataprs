@@ -21,11 +21,11 @@ aprsis_tocall = APMPAD
 # This variable is used by the Apprise communication subroutines
 # Its contents are freely configurable and will be used in case
 # of program crashes (e.g. Telegram messages to the bot's host)
-aprs_client_name = Secure APRS Bastion Bot
+aprs_client_name = ChatAPRS
 #
 # This is the bot's default error message. It will be sent to the user
 # whenever the input parser was unable to understand the user's message.
-aprs_input_parser_default_error_message = Did not understand your request. Have a look at my documentation at https://github.com/joergschultzelutter/secure-aprs-bastion-bot
+aprs_input_parser_default_error_message = Did not understand your request. Have a look at my documentation at https://github.com/joergschultzelutter/chataprs
 #
 # Enable or disable message enumeration.
 # message enumeration = True:  add trailing two-digit message number to the
@@ -125,10 +125,9 @@ aprsis_bulletin_interval_minutes = 1
 # - Bullets use ASCII-7 character set only
 # - Entries with no message content will be ignored and not broadcasted to APRS-IS
 #
-bln0 = Core APRS Client (Test Mode)
-bln1 = Hello World
-#bln1 = See https://github.com/joergschultzelutter for
-#bln2 = program source code. 73 de DF1JSL
+bln0 = ChatAPRS - an AI-based APRS chatbot
+bln1 = See https://github.com/joergschultzelutter/chataprs for program src
+bln2 = and comments. 73 de DF1JSL
 bln4 =
 bln5 =
 bln6 =
@@ -221,17 +220,13 @@ aprs_message_counter_file_name = core_aprs_client_message_counter.txt
 #
 # Configuration data that is specific to chataprs
 #
-# Filename for the AI's individual user prompt
-# Placeholder "ai_processor" will later on be replaced with
-# the respective AI qualifier
-chap_ai_user_prompt_filename = chataprs_ai_prompt_{ai_processor}.txt
+# Filename for the future AI user prompt prompt
+chap_ai_prompt_filename = chataprs_ai_prompt_{ai_processor}.txt
 
-[ai_processor_api_keys]
+[ai_api_keys]
 #
 # API keys for each supported AI (see chap_ai_processor_main.py)
-# Names MUST be identical to content from "chap_ai_qualifiers" list
-# from the chap_ai_processor_main.py file
-# Set value to NOT_CONFIGURED if you don't want to use the API key
+# Names MUST be identical to content from "chap_ai_qualifiers"
 #
-openai = NOT_CONFIGURED
-googlepalm = NOT_CONFIGURED
+openai = 12345678
+googlepalm = 23456789
