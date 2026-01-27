@@ -68,6 +68,9 @@ def generate_output_message(
         must not be 'None'
     """
 
+    _command_code = input_parser_response_object["command_code"]
+    _aprs_message = input_parser_response_object["aprs_message"]
+
 
     return False, None, None
 
