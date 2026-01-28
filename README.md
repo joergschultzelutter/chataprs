@@ -12,7 +12,7 @@
 <!--te-->
 
 ## Introduction
-APRS users can use `chataprs` to query shorter requests to AIs such as OpenAI, Google, etc. The length of the query from the APRS user to the AI is determined by the maximum length of an APRS message (67 characters). Responses from the AI to the APRS user are transmitted as short as possible in terms of content, but due to their transmission as numbered messages, they can contain up to 5,800 bytes (aka 99 separate APRS messages) in case a longer answer is deemed necessary.
+APRS users can use `chataprs` to query shorter requests to AIs such as OpenAI, Google, etc. The length of the query from the APRS user to the AI is determined by the maximum length of an APRS message (67 characters). Responses from the AI to the APRS user are transmitted as short as possible in terms of content, but due to their transmission as numbered messages, they can contain up to 5.7kb (aka 99 separate APRS messages, each containing up to 59 characters) in case a longer answer is deemed necessary. You can limit a maximum message length in each AI's individual user prompt file.
 
 ## Installation instructions
 The installation and configuration instructions can be found [here](/docs/installation-instructions.md).
