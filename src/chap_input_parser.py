@@ -94,7 +94,7 @@ def parse_input_message(
                     # Since we have checked the existence of the template user prompt filename,
                     # we do not perform any further checks on
                     _user_prompt_filename = instance.config_data["chataprs"][
-                        new_ai_processor
+                        "chap_ai_prompt_filename"
                     ].format(ai_processor=new_ai_processor)
                     if does_file_exist(file_name=_user_prompt_filename):
                         _success, _user_prompt_data = read_prompt_file_from_disk(
