@@ -42,15 +42,14 @@ The configuration that is specific to `chataprs` can be found at the end of the 
 #
 # Configuration data that is specific to chataprs
 #
-# Filename for the llm prompt
-chap_llm_prompt_filename = chataprs_ai_prompt_{llm}.txt
+# Filename for the future AI user prompt prompt
+chap_ai_prompt_filename = chataprs_ai_prompt_{ai_processor}.txt
 
 [ai_api_keys]
 #
-# API keys for each supported llm (see chap_ai_processor_main.py)
-# Names MUST be identical to content from "chap_ai_qualifiers" list
-# from the chap_ai_processor_main.py file
-# Set value to NOT_CONFIGURED if you don't want to use the API key
+# API keys for each supported AI (see chap_ai_processor_main.py)
+# Names MUST be identical to content from "chap_ai_qualifiers"
+# A value of "NOT_CONFIGURED" disables the API Key for usage
 #
 openai = NOT_CONFIGURED
 googlepalm = NOT_CONFIGURED
