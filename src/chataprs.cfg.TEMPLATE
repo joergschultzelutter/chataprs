@@ -227,6 +227,7 @@ chap_ai_prompt_filename = chataprs_ai_prompt_{ai_processor}.txt
 #
 # API keys for each supported AI (see chap_ai_processor_main.py)
 # Names MUST be identical to content from "chap_ai_qualifiers"
+# A value of "NOT_CONFIGURED" disables the API Key for usage
 #
-openai = 12345678
-googlepalm = 23456789
+openai = NOT_CONFIGURED
+googlepalm = NOT_CONFIGURED
