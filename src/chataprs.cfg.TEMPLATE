@@ -222,6 +222,10 @@ aprs_message_counter_file_name = core_aprs_client_message_counter.txt
 #
 # Filename for the future AI user prompt prompt
 chap_ai_prompt_filename = chataprs_ai_prompt_{ai_processor}.txt
+#
+# Default AI (see chap_ai_processor_main.py)
+# Name MUST be identical to content from "chap_ai_qualifiers"
+chap_default_ai = openai
 
 [ai_api_keys]
 #
