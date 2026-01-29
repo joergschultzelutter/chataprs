@@ -94,11 +94,30 @@ if __name__ == "__main__":
         output_generator=generate_output_message,
     )
 
-    # Save the command config filename - we may need to re-read the file
-    # in case its content has changed during runtime
+    # Get the default AI name from our config data
+    chap_shared.ai_processor = client.config_data["chataprs"]["chap_default_ai"]
+
+    # check if the user has specified a valid AI qualifier
+    if _default_ai_processor not in chap_ai_processor_main.ai_processors_qualifiers:
+        logger.error(f"The default AI processor '{chap_shared.ai_processor}' in your config file is unknown to me")
+        sys.exit(0)
+
+    _ai_api_key = None
+    
+    # Check if the AI qualifier has an active API key
+    if _default_ai_processor not in client.config_data["chataprs_api_keys"]:
+        logger.error(f"The default AI processor '{chap_shared.ai_processor}' in your config file has no API key entry")
+        sys.exit(0)
+    else:
+        if client.config_data["chataprs_api_keys"][chap_shared.ai_processor] is "NOT_CONFIGURED":
+            logger.error(f"The default AI processor '{chap_shared.ai_processor}' in your config file is not configured")
+            sys.exit(0)
+
+    # Set our shared variables
+    chap_shared.ai_api_key = client.config_data["chataprs_api_keys"][chap_shared.ai_processor]
     chap_shared.user_prompt_filename = client.config_data["chataprs"][
         "chap_user_prompt_filename"
-    ]
+    ].format(ai_processor=chap_shared.ai_processor)
 
     # Verify if the Command Config file exists
     if not os.path.isfile(chap_shared.user_prompt_filename):
