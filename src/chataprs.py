@@ -102,8 +102,6 @@ if __name__ == "__main__":
         logger.error(f"The default AI processor '{chap_shared.ai_processor}' in your config file is unknown to me")
         sys.exit(0)
 
-    _ai_api_key = None
-    
     # Check if the AI qualifier has an active API key
     if _default_ai_processor not in client.config_data["chataprs_api_keys"]:
         logger.error(f"The default AI processor '{chap_shared.ai_processor}' in your config file has no API key entry")
