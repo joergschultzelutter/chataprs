@@ -40,14 +40,14 @@ def _process_ai_request(
     return response.result
 
 
-def ai_prompt_palm(user_prompt: str, input_text: str, api_key: str, **kwargs):
+def ai_prompt_palm(persona: str, user_prompt: str, api_key: str, **kwargs):
     """
     Summarize and abbreviate text via Google PaLM
     ==========
+    persona: 'str'
+        Persona for inquiry
     user_prompt: 'str'
-        User prompt used for processing the input text
-    input_text: 'str'
-        The text that we want to process
+        The input text from the user that we want to process
     api_key: 'str'
         Google PaLM API Key
 
@@ -61,13 +61,9 @@ def ai_prompt_palm(user_prompt: str, input_text: str, api_key: str, **kwargs):
     max_output_tokens = 1000
     model = "models/text-bison-001"
 
-    objective = user_prompt
-
-    user_content = f"{input_text}"
-
     response = _process_ai_request(
         model=model,
-        content=f"{objective} {user_content}",
+        content=f"{persona} {user_prompt}",
         temp=temp,
         max_output_tokens=max_output_tokens,
         api_key=api_key,
