@@ -121,15 +121,15 @@ def ollama_generate(
 
 
 def ai_processor_ollama_local(
-    user_prompt: str, input_text: str, api_key: str, **kwargs
+    persona: str, user_prompt: str, **kwargs
 ):
     """
     Summarize and abbreviate text via ollama
 
     Parameters
     ==========
-    user_prompt: 'str'
-        The user prompt that OpenAI is supposed to use
+    persona: 'str'
+        Persona for inquiry
     input_text: 'str'
         The text that we want to process
     api_key: 'str'
@@ -145,8 +145,8 @@ def ai_processor_ollama_local(
         output = ollama_generate(
             base_url="http://localhost:11434",
             model="llama3.1",
-            persona_system_prompt=user_prompt,
-            user_prompt=input_text,
+            persona_system_prompt=persona,
+            user_prompt=user_prompt,
             temperature=0.2,
             stream=False,
         )
@@ -159,3 +159,4 @@ def ai_processor_ollama_local(
 
 if __name__ == "__main__":
     pass
+
