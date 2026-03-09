@@ -27,14 +27,14 @@ import json
 from chap_logger import logger
 
 
-def ai_prompt_openai(user_prompt: str, input_text: str, api_key: str, **kwargs):
+def ai_prompt_openai(persona: str, user_prompt: str, api_key: str, **kwargs):
     """
     Summarize and abbreviate text via OpenAI
     ==========
+    persona: 'str'
+        Persona for inquiry
     user_prompt: 'str'
-        The user prompt that OpenAI is supposed to use
-    input_text: 'str'
-        The text that we want to process
+        The input text from the user that we want to process
     api_key: 'str'
         OpenAI API Key
 
@@ -45,11 +45,6 @@ def ai_prompt_openai(user_prompt: str, input_text: str, api_key: str, **kwargs):
     """
 
     client = OpenAI(api_key=api_key)
-
-    objective = user_prompt
-
-    user_content = f"{input_text}"
-
     result = None
 
     try:
@@ -57,11 +52,11 @@ def ai_prompt_openai(user_prompt: str, input_text: str, api_key: str, **kwargs):
             messages=[
                 {
                     "role": "system",
-                    "content": objective,
+                    "content": persona,
                 },
                 {
                     "role": "user",
-                    "content": user_content,
+                    "content": user_prompt,
                 },
             ],
             model="gpt-3.5-turbo",
