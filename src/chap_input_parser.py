@@ -93,21 +93,21 @@ def parse_input_message(
                 if _ai_api_key is not "NOT_CONFIGURED":
                     # Since we have checked the existence of the template user prompt filename,
                     # we do not perform any further checks on
-                    _user_prompt_filename = instance.config_data["chataprs"][
+                    _persona_filename = instance.config_data["chataprs"][
                         "chap_ai_prompt_filename"
                     ].format(ai_processor=new_ai_processor)
-                    if does_file_exist(file_name=_user_prompt_filename):
-                        _success, _user_prompt_data = read_prompt_file_from_disk(
-                            filename=_user_prompt_filename
+                    if does_file_exist(file_name=_persona_filename):
+                        _success, _persona_data = read_prompt_file_from_disk(
+                            filename=_persona_filename
                         )
                         if _success:
                             # Save content to our shared data area
                             chap_shared.ai_processor = new_ai_processor
                             chap_shared.ai_api_key = _ai_api_key
-                            chap_shared.user_prompt_filename = _user_prompt_filename
-                            chap_shared.user_prompt_data = _user_prompt_data
-                            chap_shared.user_prompt_initial_timestamp = (
-                                get_modification_time(filename=_user_prompt_filename)
+                            chap_shared.persona_filename = _persona_filename
+                            chap_shared.persona_data = _persona_data
+                            chap_shared.persona_initial_timestamp = (
+                                get_modification_time(filename=_persona_filename)
                             )
                             # Set our exit content and command code
                             command_code = "ai_change"
