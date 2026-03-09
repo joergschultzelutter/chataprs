@@ -25,6 +25,7 @@
 from chap_logger import logger
 import os
 
+
 def get_modification_time(filename: str):
     timestamp = None
     if os.path.isfile(filename):
@@ -46,6 +47,7 @@ def does_file_exist(file_name: str):
         True /False
     """
     return os.path.isfile(file_name)
+
 
 def read_prompt_file_from_disk(filename: str):
     """
@@ -76,7 +78,7 @@ def read_prompt_file_from_disk(filename: str):
             with open(file=filename, mode="r") as prompt_file:
                 data = prompt_file.read()
                 logger.info(f"Configuration file '{filename}' was successfully read")
-
+                __success = True
         except:
             logger.warning(f"Cannot read prompt file '{filename}'")
     return __success, data

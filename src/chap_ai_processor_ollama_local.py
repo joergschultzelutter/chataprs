@@ -34,7 +34,6 @@ from urllib import response
 from chap_logger import logger
 
 
-
 def ollama_generate(
     base_url: str,
     model: str,
@@ -120,9 +119,7 @@ def ollama_generate(
         return "".join(out)
 
 
-def ai_processor_ollama_local(
-    persona: str, user_prompt: str, **kwargs
-):
+def ai_prompt_ollama_local(persona: str, user_prompt: str, **kwargs):
     """
     Summarize and abbreviate text via ollama
 
@@ -157,6 +154,3 @@ def ai_processor_ollama_local(
 
 if __name__ == "__main__":
     pass
-
-
-

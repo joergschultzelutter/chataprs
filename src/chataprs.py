@@ -21,6 +21,7 @@ from CoreAprsClient import CoreAprsClient
 # Your custom input parser and output generator code
 from chap_input_parser import parse_input_message
 from chap_output_generator import generate_output_message
+from chap_pre_processor import pre_processing
 
 import argparse
 import os
@@ -55,22 +56,14 @@ def get_command_line_params():
         help="APRS framework config file name (default is 'chataprs.cfg')",
     )
 
-    parser.add_argument(
-        "--ai",
-        default=ai_processors_qualifiers[0],
-        choices=ai_processors_qualifiers,
-        help="Valid AI processors",
-    )
-
     args = parser.parse_args()
     cfg = args.configfile.name
-    ai = args.ai
 
     if not os.path.isfile(cfg):
         print("Config file does not exist; exiting")
         sys.exit(0)
 
-    return cfg, ai
+    return cfg
 
 
 if __name__ == "__main__":
@@ -78,7 +71,7 @@ if __name__ == "__main__":
     logger.debug(msg="Starting ChatAPRS")
 
     # Get the configuration file name
-    configfile, my_ai = get_command_line_params()
+    configfile = get_command_line_params()
 
     # Create the CoreAprsClient object. Supply the
     # following parameters:
@@ -92,27 +85,39 @@ if __name__ == "__main__":
         log_level=logging.DEBUG,
         input_parser=parse_input_message,
         output_generator=generate_output_message,
+        pre_processor=pre_processing,
     )
 
     # Get the default AI name from our config data
     chap_shared.ai_processor = client.config_data["chataprs"]["chap_default_ai"]
 
     # check if the user has specified a valid AI qualifier
-    if chap_shared.ai_processor not in chap_ai_processor_main.ai_processors_qualifiers:
-        logger.error(f"The default AI processor '{chap_shared.ai_processor}' in your config file is unknown to me")
+    if chap_shared.ai_processor not in ai_processors_qualifiers:
+        logger.error(
+            f"The default AI processor '{chap_shared.ai_processor}' in your config file is unknown to me"
+        )
         sys.exit(0)
 
     # Check if the AI qualifier has an active API key
     if chap_shared.ai_processor not in client.config_data["chataprs_api_keys"]:
-        logger.error(f"The default AI processor '{chap_shared.ai_processor}' in your config file has no API key entry")
+        logger.error(
+            f"The default AI processor '{chap_shared.ai_processor}' in your config file has no API key entry"
+        )
         sys.exit(0)
     else:
-        if client.config_data["chataprs_api_keys"][chap_shared.ai_processor] is "NOT_CONFIGURED":
-            logger.error(f"The default AI processor '{chap_shared.ai_processor}' in your config file is not configured")
+        if (
+            client.config_data["chataprs_api_keys"][chap_shared.ai_processor]
+            == "NOT_CONFIGURED"
+        ):
+            logger.error(
+                f"The default AI processor '{chap_shared.ai_processor}' in your config file is not configured"
+            )
             sys.exit(0)
 
     # Set our shared variables
-    chap_shared.ai_api_key = client.config_data["chataprs_api_keys"][chap_shared.ai_processor]
+    chap_shared.ai_api_key = client.config_data["chataprs_api_keys"][
+        chap_shared.ai_processor
+    ]
     chap_shared.persona_filename = client.config_data["chataprs"][
         "chap_persona_filename"
     ].format(ai_processor=chap_shared.ai_processor)

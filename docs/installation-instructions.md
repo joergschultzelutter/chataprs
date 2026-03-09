@@ -44,6 +44,10 @@ The configuration that is specific to `chataprs` can be found at the end of the 
 #
 # Filename for the future AI user prompt prompt
 chap_ai_prompt_filename = chataprs_ai_prompt_{ai_processor}.txt
+#
+# Default AI (see chap_ai_processor_main.py)
+# Name MUST be identical to content from "chap_ai_qualifiers"
+chap_default_ai = ollama_local
 
 [ai_api_keys]
 #
@@ -53,6 +57,7 @@ chap_ai_prompt_filename = chataprs_ai_prompt_{ai_processor}.txt
 #
 openai = NOT_CONFIGURED
 googlepalm = NOT_CONFIGURED
+ollama_local = apikey
 ```
 
 ##### `chataprs` configuration section

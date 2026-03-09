@@ -85,8 +85,8 @@ def generate_output_message(
             output_message = "AI change successful"
         case "ai_process":
             output_message = process_ai_content(
-                persona=chap_shared.persona,
-                user_prompt=aprs_message,
+                persona=chap_shared.persona_data,
+                user_prompt=_aprs_message,
                 ai_processor=chap_shared.ai_processor,
                 api_key=chap_shared.ai_api_key,
             )
