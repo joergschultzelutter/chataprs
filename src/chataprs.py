@@ -113,32 +113,32 @@ if __name__ == "__main__":
 
     # Set our shared variables
     chap_shared.ai_api_key = client.config_data["chataprs_api_keys"][chap_shared.ai_processor]
-    chap_shared.user_prompt_filename = client.config_data["chataprs"][
-        "chap_user_prompt_filename"
+    chap_shared.persona_filename = client.config_data["chataprs"][
+        "chap_persona_filename"
     ].format(ai_processor=chap_shared.ai_processor)
 
     # Verify if the Command Config file exists
-    if not os.path.isfile(chap_shared.user_prompt_filename):
+    if not os.path.isfile(chap_shared.persona_filename):
         logger.error(
-            msg=f"User prompt file '{chap_shared.user_prompt_filename}' does not exist; exiting"
+            msg=f"User prompt file '{chap_shared.persona_filename}' does not exist; exiting"
         )
         sys.exit(0)
 
     # Read the config file from disk
-    success, chap_shared.user_prompt_data = read_prompt_file_from_disk(
-        filename=chap_shared.user_prompt_filename
+    success, chap_shared.persona_data = read_prompt_file_from_disk(
+        filename=chap_shared.persona_filename
     )
     if not success:
         logger.error(
-            msg=f"Unable to read user prompt file '{chap_shared.user_prompt_filename}'; exiting"
+            msg=f"Unable to read user prompt file '{chap_shared.persona_filename}'; exiting"
         )
         sys.exit(0)
 
     # remember the prompt file's initial timestamp, thus allowing us to
     # detect any changes to the file during runtime (and re-read the file
     # into memory, if necessary)
-    chap_shared.user_prompt_initial_timestamp = get_modification_time(
-        filename=chap_shared.user_prompt_filename
+    chap_shared.persona_initial_timestamp = get_modification_time(
+        filename=chap_shared.persona_filename
     )
 
     # Finally, activate the APRS client and connect to APRS-IS
