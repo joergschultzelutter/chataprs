@@ -31,9 +31,9 @@ from chap_ai_processor_palm import ai_prompt_palm
 from chap_ai_processor_ollama_local import ai_prompt_ollama_local
 
 ai_processors = {
+    "ollama_local": ai_prompt_ollama_local,
     "openai": ai_prompt_openai,
     "googlepalm": ai_prompt_palm,
-    "ollama_local": ai_prompt_ollama_local,
 }
 
 ai_processors_qualifiers = list(ai_processors.keys())
