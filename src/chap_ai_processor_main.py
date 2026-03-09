@@ -40,11 +40,11 @@ ai_processors_qualifiers = list(ai_processors.keys())
 
 
 def process_ai_content(
-    user_prompt: str, input_text: str, ai_processor: str, api_key: str
+    persona: str, user_prompt: str, ai_processor: str, api_key: str
 ):
     assert ai_processor in ai_processors
     return ai_processors[ai_processor](
-        user_prompt=user_prompt, input_text=input_text, api_key=api_key
+        persona=personna, user_prompt=user_prompt, api_key=api_key
     )
 
 
