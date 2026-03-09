@@ -28,6 +28,8 @@
 #
 
 from CoreAprsClient import CoreAprsClient
+import re
+import chap_ai_processor_main
 
 
 def pre_processing(
@@ -62,7 +64,15 @@ def pre_processing(
         message to the user prior to starting the input parser parse process.
     """
 
-    return True, "Contacting AI instance, please wait ...."
+    # try to determine if we are supposed to switch
+    pattern = rf"^\s*switchai\s+(?P<proc>{'|'.join(map(re.escape, chap_ai_processor_main.ai_processors_qualifiers))})\s*(?P<msg>.*)$"
+    regex = re.compile(pattern, re.IGNORECASE)
+
+    matches = regex.match(aprs_message)
+    if matches:
+        return True, "Attempting AI processor switch ..."
+    else:
+        return True, "Contacting AI instance, please wait ...."
 
 
 if __name__ == "__main__":

@@ -82,7 +82,7 @@ def generate_output_message(
     match _command_code:
         case "ai_change":
             success = True
-            output_message = "AI change successful"
+            output_message = "AI processor change successful"
         case "ai_process":
             output_message = process_ai_content(
                 persona=chap_shared.persona_data,

@@ -209,3 +209,5 @@ __marimo__/
 
 .DS_Store
 chataprs.cfg
+data_files
+apprise.yml

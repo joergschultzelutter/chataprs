@@ -94,7 +94,7 @@ def parse_input_message(
                     # Since we have checked the existence of the template user prompt filename,
                     # we do not perform any further checks on
                     _persona_filename = instance.config_data["chataprs"][
-                        "chap_ai_prompt_filename"
+                        "chap_persona_filename"
                     ].format(ai_processor=new_ai_processor)
                     if does_file_exist(file_name=_persona_filename):
                         _success, _persona_data = read_prompt_file_from_disk(
@@ -116,7 +116,7 @@ def parse_input_message(
         if _switch_ai_error:
             return_code = CoreAprsClientInputParserStatus.PARSE_ERROR
             input_parser_error_message = (
-                "That AI is either not configured or unknown to me"
+                "That AI processor is not configured or unknown to me"
             )
     else:
         # no command code, meaning that this is a message which needs to be forwarded
