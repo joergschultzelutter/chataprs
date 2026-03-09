@@ -70,9 +70,9 @@ def pre_processing(
 
     matches = regex.match(aprs_message)
     if matches:
-        return True, "Attempting AI processor switch ..."
+        return True, "Attempting AI processor switch"
     else:
-        return True, "Contacting AI instance, please wait ...."
+        return True, "Contacting AI instance, please be patient ...."
 
 
 if __name__ == "__main__":

@@ -90,7 +90,7 @@ def parse_input_message(
                 _ai_api_key = instance.config_data["chataprs_api_keys"][
                     new_ai_processor
                 ]
-                if _ai_api_key is not "NOT_CONFIGURED":
+                if _ai_api_key != "NOT_CONFIGURED":
                     # Since we have checked the existence of the template user prompt filename,
                     # we do not perform any further checks on
                     _persona_filename = instance.config_data["chataprs"][
@@ -116,7 +116,7 @@ def parse_input_message(
         if _switch_ai_error:
             return_code = CoreAprsClientInputParserStatus.PARSE_ERROR
             input_parser_error_message = (
-                "That AI processor is not configured or unknown to me"
+                "AI processor is either not configured or unknown to me"
             )
     else:
         # no command code, meaning that this is a message which needs to be forwarded

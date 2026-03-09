@@ -90,12 +90,20 @@ def generate_output_message(
                 ai_processor=chap_shared.ai_processor,
                 api_key=chap_shared.ai_api_key,
             )
+
+            # From this point, everything is considered as successful - even
+            # if we were unable to retrieve the response from the AI. Reason:
+            # Rather than returning the generic response message, we do
+            # return a custom response message - therefore, processing of
+            # the output generator was "successful"
+            success = True
+
             if output_message is None:
-                success = False
-                output_message = "Error; unable to retrieve answer from AI"
-            else:
-                success = True
+                # return our custom error message to the user
+                output_message = "Error; unable to retrieve response from AI"
         case _:
+            # this is our generic fallback. If we reach this point, then there is a
+            # discrepancy between the input processor and the output generator.
             raise ValueError(
                 f"Output processor has received unknown command code '{_command_code}'"
             )
