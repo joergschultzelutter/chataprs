@@ -130,10 +130,8 @@ def ai_processor_ollama_local(
     ==========
     persona: 'str'
         Persona for inquiry
-    input_text: 'str'
-        The text that we want to process
-    api_key: 'str'
-        OpenAI API Key
+    user_promcpt: 'str'
+        The input text from the user that we want to process
 
     Returns
     =======
@@ -159,4 +157,5 @@ def ai_processor_ollama_local(
 
 if __name__ == "__main__":
     pass
+
 
