@@ -68,7 +68,7 @@ ollama_local = does_not_need_an_api_key
 
 You can use the `ollama_local` AI for connecting to a local AI instance, e.g. an `ollama` on-prem installation. By default, the code assumes that
 
-- You have an ollama (Docker) instance running on its default port 11434
+- You have an ollama (Docker) instance running on its default port 11434, e.g. `docker run -d --name ollama -p 11434:11434 ollama/ollama`
 - You have pulled the llama3.1 model, e.g. `docker exec -it ollama ollama pull llama3.1`
 
 ## `chataprs` configuration section
