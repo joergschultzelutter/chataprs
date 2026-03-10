@@ -220,7 +220,7 @@ aprs_message_counter_file_name = core_aprs_client_message_counter.txt
 #
 # Configuration data that is specific to chataprs
 #
-# Filename for the future AI-dependent persona
+# Template filename for the future AI-dependent persona
 chap_persona_filename = chataprs_ai_persona_{ai_processor}.txt
 #
 # Default AI (see chap_ai_processor_main.py)
