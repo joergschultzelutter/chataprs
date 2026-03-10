@@ -8,8 +8,12 @@ The following installation instructions assume that the user is using the defaul
 ## Table of Contents
 <!--ts-->
 * [Initial steps](#initial-steps)
-* [Create the callsign/command-code configuration file with `configure.py`](#create-the-callsigncommand-code-configuration-file-with-configurepy)
 * [Create the `chataprs` configuration file](#create-the-chataprs-configuration-file)
+* [Basic bot configuration](#basic-bot-configuration)
+* [`chataprs` specific configuration](#chataprs-specific-configuration)
+* [ollama_local](#ollama-local)
+* [`chataprs` configuration section](#chataprs-configuration-section)
+* [`ai_api_keys` configuration section](#ai_api_keys-configuration-section)
 * [Apprise config file](#apprise-config-file)
 * [Start the bot](#start-the-bot)
 <!--te-->
@@ -33,7 +37,7 @@ The following sections describe be bot's configuration. The first section focuse
     - `aprsis_server_filter` - the APRS-IS server filter. If e.g. your callsign is `DF1JSL-13`, you MUST go for the [group message filter](https://www.aprs-is.net/javAPRSFilter.aspx) that is specific to your callsign (`/g/DF1JSL-13`). Note that no additional callsign filtering is in place, meaning that `chataprs` relies on proper filter settings!
   - Set the [crash handler's config file name](https://github.com/joergschultzelutter/core-aprs-client/blob/master/docs/configuration_subsections/config_crash_handler.md) (field name in the config file is `apprise_config_file`) to `NOT_CONFIGURED` if you want to disable Apprise messaging. In any other case, configure the Apprise config file as shown in the next paragraph.
 
-### `chataprs` specific configuration
+## `chataprs` specific configuration
 
 The configuration that is specific to `chataprs` can be found at the end of the configuration file and consists of two sections:
 
@@ -60,13 +64,18 @@ googlepalm = NOT_CONFIGURED
 ollama_local = apikey
 ```
 
-##### `chataprs` configuration section
+## ollama_local
+
+You can use the `ollama_local` AI for connecting to a local AI instance, e.g. an `ollama` on-prem installation. By default, the code assumes that
+
+- You have an ollama (Docker) instance running on its default port 11434
+- You have pulled the llama3.1 model, e.g. `docker run -d --name ollama -p 11434:11434 ollama/ollama`
+
+## `chataprs` configuration section
 
 - `chap_llm_prompt_filename` contains a template filename for the future AI-specific user prompt file.
 
-##### `ai_api_keys` configuration section
-
-
+## `ai_api_keys` configuration section
 
 ## Apprise config file
 - Configure the bot's Apprise messaging configuration file. If you want to disable the crash handler's Apprise messaging: see [basic bot configuration](/docs/installation-instructions.md#basic-bot-configuration). 
