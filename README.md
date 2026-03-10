@@ -23,7 +23,7 @@ The bot only knows only one command (`switchai`). Any messages with different co
 
 ## Technical details
 
-`secure-aprs-bastion-bot` relies on my [`core-aprs-client`](https://www.github.com/joergschultzelutter/core-aprs-client) APRS messaging framework. 
+`chataprs` acts as a showcase application for my [`core-aprs-client`](https://www.github.com/joergschultzelutter/core-aprs-client) APRS bot framework. 
 
 ## The fine print
 
