@@ -1,6 +1,6 @@
 # Usage
 
-The bot only knows only one command (`switchai`). Any messages with different content are interpreted as a query to the AI.
+The bot knows only one command (`switchai`), followed by one of the valid AI processor qualifiers (see list below). Any messages with different content are interpreted as a query to the AI.
 
 ## Changing the AI provider
 Using the command `switchai`, a switch from, for example, the OpenAI API to Google can be forced during runtime. A successful switch requires two things:
@@ -16,4 +16,6 @@ ai_processors = {
     "googlepalm": ai_prompt_palm,
 }
 ```
-Switching to a different AI processor can be done by sending the `awitchai` command plus AI processor name to the bot, e.g. `switchai openai`.
+Switching to a different AI processor can be done by sending the `awitchai` command plus AI processor name to the bot, e.g. `switchai openai`. If the switch was successful (*), you will receive an `AI processor change successful` message. 
+
+(*) The AI's API key is _not_ checked at this point in time, meaning that accessing the AI at a later stage still might fail.
