@@ -11,7 +11,7 @@ The following installation instructions assume that the user is using the defaul
 * [Create the `chataprs` configuration file](#create-the-chataprs-configuration-file)
 * [Basic bot configuration](#basic-bot-configuration)
 * [`chataprs` specific configuration](#chataprs-specific-configuration)
-  * [ollama_local](#ollama-local)
+  * [ollama](#ollama)
 * [Apprise config file](#apprise-config-file)
 * [Start the bot](#start-the-bot)
 <!--te-->
@@ -45,11 +45,11 @@ The configuration that is specific to `chataprs` can be found at the end of the 
 # Configuration data that is specific to chataprs
 #
 # Template filename for the future AI-dependent persona
-chap_persona_filename = chataprs_ai_prompt_{ai_processor}.txt
+chap_persona_filename = chataprs_ai_persona_{ai_processor}.txt
 #
 # Default AI (see chap_ai_processor_main.py)
 # Name MUST be identical to content from "chap_ai_qualifiers"
-chap_default_ai = ollama_local
+chap_default_ai = ollama
 
 [chataprs_api_keys]
 #
@@ -58,23 +58,48 @@ chap_default_ai = ollama_local
 # A value of "NOT_CONFIGURED" disables the API Key for usage
 #
 openai = NOT_CONFIGURED
-googlepalm = NOT_CONFIGURED
-ollama_local = does_not_need_an_api_key
+ollama = dummy_api_key
+#
+[chataprs_models]
+#
+# Model for each supported AI
+#
+openai = gpt-5.2
+ollama = llama3.1
+#
+[chataprs_urls]
+#
+# URL for each supported AI
+# (some AIs such as 'openai' do not need a dedicated URL as
+# the Python package will take care of this. For those AIs,
+# we use a placeholder URL instead.
+#
+openai = http://localhost
+ollama = http://localhost:11434
 ```
 
 | Field name                             | Field type | Description                                                                                                                                                                                                                                                              |
 |----------------------------------------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `chap_persona_filename`                | `str`      | Template filename for the AI-dependent persona file. Will get amended with the selected AI name; e.g. for an active `openai` selection, the filename is set to `chataprs_ai_prompt_openai.txt`. Persona files must exist per AI - otherwise, you cannot switch to an AI. |
 | `chap_default_ai`                      | `str`      | Default AI, used at startup. Must be part of the `ai_processors` dictionary from the [`chap_ai_processor_main.py`](/src/chap_ai_processor_main.py) file.                                                                                                                 |
-| Entries in `chataprs_api_keys` section | `str`      | API keys per AI. Names must be part of the `ai_processors` dictionary from the [`chap_ai_processor_main.py`](/src/chap_ai_processor_main.py) file. An API key entry must be present even if your AI processor does not require one.                                      |
+| Entries in `chataprs_api_keys` section | `str`      | API keys per AI. Names must be part of the `ai_processors` dictionary from the [`chap_ai_processor_main.py`](/src/chap_ai_processor_main.py) file. An API (dummy) key entry must be present even if your AI processor does not require one.                              |
+| Entries in `chataprs_models` section   | `str`      | AI model per AI. Names must be part of the `ai_processors` dictionary from the [`chap_ai_processor_main.py`](/src/chap_ai_processor_main.py) file.                                                                                                                       |
+| Entries in `chataprs_urls` section     | `str`      | URL+port per AI. Names must be part of the `ai_processors` dictionary from the [`chap_ai_processor_main.py`](/src/chap_ai_processor_main.py) file. A (dummy) key entry must be present even if your AI processor's Python package does not require one.                  |
 
-### ollama_local
+## AI specifics
+### ollama
 
-You can use the `ollama_local` AI for connecting to a local AI instance, e.g. an `ollama` on-prem installation. By default, the code assumes that
+You can use the `ollama` AI for connecting to a local `ollama` AI on-prem instance. By default, the code assumes that
 
 - You have an ollama (Docker) instance running on its default port 11434, e.g. `docker run -d --name ollama -p 11434:11434 ollama/ollama`
-- You have pulled the llama3.1 model, e.g. `docker exec -it ollama ollama pull llama3.1`
-- Although `ollama_local` does not require an API key, remember to set a (dummy) API key entry in the configuration file's in `chataprs_api_keys` section
+- You have pulled the `llama3.1` model, e.g. `docker exec -it ollama ollama pull llama3.1`
+- `model` and local `url` can be set in the config file; see [previous paragraph](#chataprs-specific-configuration)
+- Although `ollama` does not require an API key, remember to set a (dummy) API key entry in the configuration file's in `chataprs_api_keys` section
+
+### openai
+
+- you need to provide an API key
+- Although `openai` does not require you to set a URL, remember to set a (dummy) URL entry in the configuration file's in `chataprs_urls` section
 
 ## Apprise config file
 - Configure the bot's Apprise messaging configuration file. If you want to disable the crash handler's Apprise messaging: see [basic bot configuration](/docs/installation-instructions.md#basic-bot-configuration). 

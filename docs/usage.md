@@ -11,7 +11,7 @@ All supported AI providers are declared in the [`chap_ai_processor_main.py`](htt
 
 ```python
 ai_processors = {
-    "ollama_local": ai_prompt_ollama_local,
+    "ollama": ai_prompt_ollama,
     "openai": ai_prompt_openai,
     "googlepalm": ai_prompt_palm,
 }

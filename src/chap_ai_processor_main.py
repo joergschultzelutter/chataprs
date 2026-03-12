@@ -29,10 +29,10 @@
 from chap_ai_processor_openai import ai_prompt_openai
 
 # from chap_ai_processor_palm import ai_prompt_palm
-from chap_ai_processor_ollama_local import ai_prompt_ollama_local
+from chap_ai_processor_ollama import ai_prompt_ollama
 
 ai_processors = {
-    "ollama_local": ai_prompt_ollama_local,
+    "ollama": ai_prompt_ollama,
     "openai": ai_prompt_openai,
     #    "googlepalm": ai_prompt_palm,
 }

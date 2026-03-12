@@ -1,5 +1,5 @@
 #
-# AI module (locale ollama instance module)
+# AI module (ollama instance module)
 # Author: Joerg Schultze-Lutter, 2023
 #
 # This program is free software; you can redistribute it and/or modify
@@ -24,12 +24,9 @@
 
 from __future__ import annotations
 
-import argparse
 import json
-import sys
 import urllib.error
 import urllib.request
-from urllib import response
 
 from chap_logger import logger
 
@@ -119,7 +116,7 @@ def ollama_generate(
         return "".join(out)
 
 
-def ai_prompt_ollama_local(persona: str, user_prompt: str, **kwargs):
+def ai_prompt_ollama(persona: str, user_prompt: str, **kwargs):
     """
     Summarize and abbreviate text via ollama
 

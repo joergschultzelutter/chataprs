@@ -225,7 +225,7 @@ chap_persona_filename = chataprs_ai_persona_{ai_processor}.txt
 #
 # Default AI (see chap_ai_processor_main.py)
 # Name MUST be identical to content from "chap_ai_qualifiers"
-chap_default_ai = ollama_local
+chap_default_ai = ollama
 
 [chataprs_api_keys]
 #
@@ -234,5 +234,21 @@ chap_default_ai = ollama_local
 # A value of "NOT_CONFIGURED" disables the API Key for usage
 #
 openai = NOT_CONFIGURED
-googlepalm = NOT_CONFIGURED
-ollama_local = does_not_need_an_api_key
+ollama = dummy_api_key
+#
+[chataprs_models]
+#
+# Model for each supported AI
+#
+openai = gpt-5.2
+ollama = llama3.1
+#
+[chataprs_urls]
+#
+# URL for each supported AI
+# (some AIs such as 'openai' do not need a dedicated URL as
+# the Python package will take care of this. For those AIs,
+# we use a placeholder URL instead.
+#
+openai = http://localhost
+ollama = http://localhost:11434
