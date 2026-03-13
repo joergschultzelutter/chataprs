@@ -27,7 +27,7 @@ import json
 from chap_logger import logger
 
 
-def ai_prompt_openai(persona: str, user_prompt: str, api_key: str, **kwargs):
+def ai_prompt_openai(persona: str, user_prompt: str, api_key: str, model: str, **kwargs):
     """
     Summarize and abbreviate text via OpenAI
     ==========
@@ -59,7 +59,7 @@ def ai_prompt_openai(persona: str, user_prompt: str, api_key: str, **kwargs):
                     "content": user_prompt,
                 },
             ],
-            model="gpt-3.5-turbo",
+            model=model,
             temperature=0.7,
             max_tokens=1000,
         )
