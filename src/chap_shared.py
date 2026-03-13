@@ -28,6 +28,8 @@ persona_data = None
 persona_filename = None
 ai_processor = None
 ai_api_key = None
+ai_model = None
+ai_url = None
 
 
 if __name__ == "__main__":
