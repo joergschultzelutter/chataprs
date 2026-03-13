@@ -121,6 +121,9 @@ if __name__ == "__main__":
     chap_shared.persona_filename = client.config_data["chataprs"][
         "chap_persona_filename"
     ].format(ai_processor=chap_shared.ai_processor)
+
+    chap_shared.ai_model = "NOT_CONFIGURED"
+    chap_shared.ai_url = "http://127.0.0.1"
     chap_shared.ai_model = client.config_data["chataprs_models"][chap_shared.ai_processor]
     chap_shared.ai_url = client.config_data["chataprs_urls"][chap_shared.ai_processor]
     
