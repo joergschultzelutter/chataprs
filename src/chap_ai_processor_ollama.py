@@ -116,7 +116,7 @@ def ollama_generate(
         return "".join(out)
 
 
-def ai_prompt_ollama(persona: str, user_prompt: str, **kwargs):
+def ai_prompt_ollama(persona: str, user_prompt: str, model="llama3.1", url: str = "http://localhost:11434", **kwargs):
     """
     Summarize and abbreviate text via ollama
 
@@ -151,3 +151,4 @@ def ai_prompt_ollama(persona: str, user_prompt: str, **kwargs):
 
 if __name__ == "__main__":
     pass
+
