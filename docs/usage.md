@@ -9,7 +9,7 @@
 The bot knows only one command (`switchai`), followed by one of the valid AI processor qualifiers (see list below). Any messages with different content are interpreted as a query to the AI.
 
 ## Changing the AI provider
-Using the command `switchai`, a switch from, for example, the OpenAI API to Google can be forced during runtime. A successful switch requires two things:
+Using the command `switchai`, a switch from, for example, the `ollama` API to `openai` can be forced during runtime. A successful switch requires two things:
 - The corresponding API key exists in the configuration file (assuming that your AI needs one).
 - An external file with the content of the AI-specific persona exists.
 
