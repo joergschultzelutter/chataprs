@@ -116,7 +116,7 @@ def ollama_generate(
         return "".join(out)
 
 
-def ai_prompt_ollama(persona: str, user_prompt: str, model="llama3.1", url: str = "http://localhost:11434", **kwargs):
+def ai_prompt_ollama(persona: str, user_prompt: str, model="llama3.2", url: str = "http://localhost:11434", **kwargs):
     """
     Summarize and abbreviate text via ollama
 
@@ -135,8 +135,8 @@ def ai_prompt_ollama(persona: str, user_prompt: str, model="llama3.1", url: str 
 
     try:
         output = ollama_generate(
-            base_url="http://localhost:11434",
-            model="llama3.1",
+            base_url=url,
+            model=model,
             persona_system_prompt=persona,
             user_prompt=user_prompt,
             temperature=0.2,
@@ -150,5 +150,6 @@ def ai_prompt_ollama(persona: str, user_prompt: str, model="llama3.1", url: str 
 
 
 if __name__ == "__main__":
-    pass
-
+    persona = "You are a helpful assistant. Provide your answer as short as possible in a maximum of 5-6 sentences, never exceeding 2,500 characters in total. Minimize line breaks. Use ASCII output only. Do not output any Unicode characters. Replace any Greek letter with its English name in ASCII (e.g., pi, theta) and any math operator with an ASCII equivalent (e.g., <=, >=, !=, ->). If you are about to output a non-ASCII character, rewrite the sentence so it contains only ASCII."
+    prompt="what is aprs"
+    print(ai_prompt_ollama(persona=persona, user_prompt=prompt,model="llama3.2", url="http://defiant.local:11434"))
