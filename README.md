@@ -2,8 +2,8 @@
 
 `chataprs` (callsign `CHAP`) is an APRS-based AI bot that supports a variety of AI platforms (provided you have API keys for each AI provider). It delivers the AI's response in a multi-message format, allowing the user to receive even long AI messages via APRS. The AI provider can be switched during runtime via special APRS command sequence.
 
->[!INFORMATION]
->My personal `chataprs` instance is currently offline as I need to install its main infrastructure
+> [!NOTE]  
+> My personal `chataprs` instance is currently offline as I still need to install its main infrastructure :-)
 
 
 ## Table of Contents
