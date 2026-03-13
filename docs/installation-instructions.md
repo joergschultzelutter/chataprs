@@ -11,7 +11,9 @@ The following installation instructions assume that the user is using the defaul
 * [Create the `chataprs` configuration file](#create-the-chataprs-configuration-file)
 * [Basic bot configuration](#basic-bot-configuration)
 * [`chataprs` specific configuration](#chataprs-specific-configuration)
+* [AI Specifics](#ai-specifics)
   * [ollama](#ollama)
+  * [openai](#openai)
 * [Apprise config file](#apprise-config-file)
 * [Start the bot](#start-the-bot)
 <!--te-->
@@ -93,13 +95,14 @@ You can use the `ollama` AI for connecting to a local `ollama` AI on-prem instan
 
 - You have an ollama (Docker) instance running on its default port 11434, e.g. `docker run -d --name ollama -p 11434:11434 ollama/ollama`
 - You have pulled the `llama3.1` model, e.g. `docker exec -it ollama ollama pull llama3.1`
+- The configuration file's `chataprs_urls` value needs to get updated with your ollama instance's URL.
 - `model` and local `url` can be set in the config file; see [previous paragraph](#chataprs-specific-configuration)
-- Although `ollama` does not require an API key, remember to set a (dummy) API key entry in the configuration file's in `chataprs_api_keys` section
+- `ollama` does not require an API key. You are still encouraged to set a (dummy) API key entry in the configuration file's in `chataprs_api_keys` section
 
 ### openai
 
-- you need to provide an API key
-- Although `openai` does not require you to set a URL, remember to set a (dummy) URL entry in the configuration file's in `chataprs_urls` section
+- You need to provide an API key
+- `openai` does not require a URL. You are still encouraged to set a (dummy) URL entry in the configuration file's in `chataprs_urls` section.
 
 ## Apprise config file
 - Configure the bot's Apprise messaging configuration file. If you want to disable the crash handler's Apprise messaging: see [basic bot configuration](/docs/installation-instructions.md#basic-bot-configuration). 
