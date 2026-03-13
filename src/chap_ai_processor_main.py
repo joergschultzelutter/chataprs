@@ -27,23 +27,20 @@
 # The actual post-processing is done in the various subsections
 
 from chap_ai_processor_openai import ai_prompt_openai
-
-# from chap_ai_processor_palm import ai_prompt_palm
 from chap_ai_processor_ollama import ai_prompt_ollama
 
 ai_processors = {
     "ollama": ai_prompt_ollama,
     "openai": ai_prompt_openai,
-    #    "googlepalm": ai_prompt_palm,
 }
 
 ai_processors_qualifiers = list(ai_processors.keys())
 
 
-def process_ai_content(persona: str, user_prompt: str, ai_processor: str, api_key: str):
+def process_ai_content(persona: str, user_prompt: str, ai_processor: str, api_key: str, model: str, url: str):
     assert ai_processor in ai_processors
     return ai_processors[ai_processor](
-        persona=persona, user_prompt=user_prompt, api_key=api_key
+        persona=persona, user_prompt=user_prompt, api_key=api_key, model=model, url=url,
     )
 
 
