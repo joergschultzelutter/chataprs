@@ -241,7 +241,7 @@ ollama = dummy_api_key
 # Model for each supported AI
 #
 openai = gpt-5.2
-ollama = llama3.1
+ollama = llama3.2
 #
 [chataprs_urls]
 #
