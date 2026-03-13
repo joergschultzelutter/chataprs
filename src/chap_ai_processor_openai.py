@@ -27,7 +27,9 @@ import json
 from chap_logger import logger
 
 
-def ai_prompt_openai(persona: str, user_prompt: str, api_key: str, model: str, **kwargs):
+def ai_prompt_openai(
+    persona: str, user_prompt: str, api_key: str, model: str, **kwargs
+):
     """
     Summarize and abbreviate text via OpenAI
     ==========

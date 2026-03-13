@@ -30,6 +30,8 @@
 from CoreAprsClient import CoreAprsClient
 import re
 import chap_ai_processor_main
+import chap_shared
+from chap_shared import ai_processor
 
 
 def pre_processing(
@@ -70,9 +72,10 @@ def pre_processing(
 
     matches = regex.match(aprs_message)
     if matches:
-        return True, "Attempting AI processor switch"
+        new_ai_processor = matches.group("proc")
+        return True, f"Attempting AI processor switch to {new_ai_processor}"
     else:
-        return True, "Contacting AI instance, please be patient ...."
+        return True, f"Contacting {chap_shared.ai_processor} AI, please wait ..."
 
 
 if __name__ == "__main__":

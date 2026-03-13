@@ -1,6 +1,10 @@
 # chataprs
 
-`chataprs` is an APRS-based AI bot that supports a variety of AI platforms (provided you have API keys for each AI provider). It delivers the AI's response in a multi-message format, allowing the user to receive even long AI messages via APRS. The AI provider can be switched during runtime via special APRS command sequence.
+`chataprs` (callsign `CHAP`) is an APRS-based AI bot that supports a variety of AI platforms (provided you have API keys for each AI provider). It delivers the AI's response in a multi-message format, allowing the user to receive even long AI messages via APRS. The AI provider can be switched during runtime via special APRS command sequence.
+
+>[!INFORMATION]
+>My personal `chataprs` instance is currently offline as I need to install its main infrastructure
+
 
 ## Table of Contents
 <!--ts-->
@@ -12,10 +16,14 @@
 <!--te-->
 
 ## Introduction
-APRS users can use `chataprs` to query shorter requests to AIs such as OpenAI, Google, etc. The length of the query from the APRS user to the AI is determined by the maximum length of an APRS message (67 characters). Responses from the AI to the APRS user are transmitted as short as possible in terms of content, but due to their transmission as numbered messages, they can contain up to 5.7kb (aka 99 separate APRS messages, each containing up to 59 characters) in case a longer answer is deemed necessary. You can limit a maximum message length in each AI's individual user prompt file.
+APRS users can use `chataprs` to query shorter requests to AIs such as OpenAI, ollama, etc. The length of the query from the APRS user to the AI is determined by the maximum length of an APRS message (67 characters). Responses from the AI to the APRS user are transmitted as short as possible in terms of content, but due to their transmission as numbered messages, they can contain up to 5.7kb (aka 99 separate APRS messages, each containing up to 59 characters) in case a longer answer is deemed necessary. You can limit a maximum message length in each AI's individual user prompt file (current config: 5-6 response sentences with 2,500 bytes max).
+
+## `chataprs` demo
+
+![Screencast](/img/screencast.gif)
 
 ## Installation instructions
-The installation and configuration instructions can be found [here](/docs/installation-instructions.md).
+The installation and configuration instructions can be found [here](/docs/usage.md#changing-the-ai-provider).
 
 ## Usage
 

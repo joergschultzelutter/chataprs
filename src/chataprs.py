@@ -82,7 +82,7 @@ if __name__ == "__main__":
     #
     client = CoreAprsClient(
         config_file=configfile,
-        log_level=logging.DEBUG,
+        log_level=logging.INFO,
         input_parser=parse_input_message,
         output_generator=generate_output_message,
         pre_processor=pre_processing,
@@ -121,12 +121,16 @@ if __name__ == "__main__":
     chap_shared.persona_filename = client.config_data["chataprs"][
         "chap_persona_filename"
     ].format(ai_processor=chap_shared.ai_processor)
-
-    chap_shared.ai_model = "NOT_CONFIGURED"
-    chap_shared.ai_url = "http://127.0.0.1"
-    chap_shared.ai_model = client.config_data["chataprs_models"][chap_shared.ai_processor]
-    chap_shared.ai_url = client.config_data["chataprs_urls"][chap_shared.ai_processor]
-    
+    chap_shared.ai_model = (
+        client.config_data["chataprs_models"][chap_shared.ai_processor]
+        if chap_shared.ai_processor in client.config_data["chataprs_models"]
+        else "NOT_CONFIGURED"
+    )
+    chap_shared.ai_url = (
+        client.config_data["chataprs_urls"][chap_shared.ai_processor]
+        if chap_shared.ai_processor in client.config_data["chataprs_urls"]
+        else "http://127.0.0.1"
+    )
 
     # Verify if the Command Config file exists
     if not os.path.isfile(chap_shared.persona_filename):

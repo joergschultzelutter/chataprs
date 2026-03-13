@@ -89,6 +89,8 @@ def generate_output_message(
                 user_prompt=_aprs_message,
                 ai_processor=chap_shared.ai_processor,
                 api_key=chap_shared.ai_api_key,
+                model=chap_shared.ai_model,
+                url=chap_shared.ai_url,
             )
 
             # From this point, everything is considered as successful - even

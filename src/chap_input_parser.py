@@ -109,12 +109,22 @@ def parse_input_message(
                             chap_shared.persona_initial_timestamp = (
                                 get_modification_time(filename=_persona_filename)
                             )
-                            chap_shared.ai_model = "NOT_CONFIGURED"
-                            chap_shared.ai_url = "http://127.0.0.1"
-                            if chap_shared.ai_processor in instance.config_data["chataprs_models"]:
-                                chap_shared.ai_model = instance.config_data["chataprs_models"][chap_shared.ai_processor]
-                            if chap_shared.ai_processor in instance.config_data["chataprs_urls"]:
-                                chap_shared.ai_url = instance.config_data["chataprs_urls"][chap_shared.ai_processor]
+                            chap_shared.ai_model = (
+                                instance.config_data["chataprs_models"][
+                                    chap_shared.ai_processor
+                                ]
+                                if chap_shared.ai_processor
+                                in instance.config_data["chataprs_models"]
+                                else "NOT_CONFIGURED"
+                            )
+                            chap_shared.ai_url = (
+                                instance.config_data["chataprs_urls"][
+                                    chap_shared.ai_processor
+                                ]
+                                if chap_shared.ai_processor
+                                in instance.config_data["chataprs_urls"]
+                                else "http://127.0.0.1"
+                            )
 
                             # Set our exit content and command code
                             command_code = "ai_change"
