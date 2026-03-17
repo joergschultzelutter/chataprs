@@ -28,6 +28,7 @@
 
 from chap_ai_processor_openai import ai_prompt_openai
 from chap_ai_processor_ollama import ai_prompt_ollama
+from chap_logger import logger
 
 ai_processors = {
     "ollama": ai_prompt_ollama,
@@ -46,6 +47,11 @@ def process_ai_content(
     url: str,
 ):
     assert ai_processor in ai_processors
+
+    logger.debug(
+        msg=f"Contacting AI processor '{ai_processor}' with user_prompt '{user_prompt}'"
+    )
+
     return ai_processors[ai_processor](
         persona=persona,
         user_prompt=user_prompt,
