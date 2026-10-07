@@ -1,2 +1,2 @@
 openai
-core-aprs-client0=0.97
+core-aprs-client=0.97
